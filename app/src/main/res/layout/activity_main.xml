@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Poster de la película -->
+        <ImageView
+            android:id="@+id/img_poster"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Título de la película -->
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="No movie found"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Año de la película -->
+        <TextView
+            android:id="@+id/txt_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Director de la película -->
+        <TextView
+            android:id="@+id/txt_director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Director"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Actores principales -->
+        <TextView
+            android:id="@+id/txt_actors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actors"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Calificación IMDb -->
+        <TextView
+            android:id="@+id/txt_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IMDb Rating"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Trama de la película -->
+        <TextView
+            android:id="@+id/txt_plot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plot"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+</ScrollView>
