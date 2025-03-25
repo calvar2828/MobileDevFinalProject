@@ -23,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".network.movie_Details" />
+        <activity android:name=".network.favorites_movies"/>
     </application>
 
 </manifest>

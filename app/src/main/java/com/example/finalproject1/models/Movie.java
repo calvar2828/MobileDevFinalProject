@@ -1,6 +1,8 @@
 package com.example.finalproject1.models;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private String Title;
     private String Year;
     private String Director;

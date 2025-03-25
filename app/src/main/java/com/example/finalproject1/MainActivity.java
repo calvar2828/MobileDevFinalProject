@@ -1,19 +1,24 @@
 package com.example.finalproject1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.finalproject1.models.Movie;
-import com.example.finalproject1.models.MovieResponse;
 import com.example.finalproject1.network.MovieApiService;
 import com.example.finalproject1.network.RetrofitClient;
+import com.example.finalproject1.network.favorites_movies;
+import com.example.finalproject1.network.movie_Details;
 
-import java.util.List;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -21,6 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private Movie currentMovie;
     private TextView txtTitle, txtYear, txtDirector, txtActors, txtRating, txtPlot;
     private ImageView imgPoster;
     private final String[] randomWords = {"love", "war", "future", "dark", "happy", "space", "ghost", "magic"};
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // Vincular los elementos de la UI
         imgPoster = findViewById(R.id.img_moviePoster);
         txtTitle = findViewById(R.id.txt_movieTitle);
-        txtRating= findViewById(R.id.txt_movieDesciption);
+        txtRating= findViewById(R.id.txt_movieRating);
         /*txtYear = findViewById(R.id.txt_year);
         txtDirector = findViewById(R.id.txt_director);
         txtActors = findViewById(R.id.txt_actors);
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(Movie movie) {
+        currentMovie = movie;
         txtTitle.setText(movie.getTitle());
         txtRating.setText("IMDb Rating: " + (movie.getImdbRating() != null? movie.getImdbRating() :"N/A"));
         /*txtYear.setText("Year: " + movie.getYear());
@@ -89,4 +96,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void accessMoviesDetails(View view){
+        if(currentMovie!=null){
+            Intent intent = new Intent(this, movie_Details.class);
+            intent.putExtra("movie_data",currentMovie);
+            startActivity(intent);
+        }
+
+    }
+
+    public void accessFavoritesMovies(View view){
+        Intent intent = new Intent(this, favorites_movies.class);
+        startActivity(intent);
+    }
 }

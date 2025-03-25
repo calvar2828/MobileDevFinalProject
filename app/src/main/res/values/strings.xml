@@ -4,16 +4,17 @@
     <string name="previous">Previous</string>
     <string name="movie_poster">Movie poster</string>
     <string name="find_your_movie">Find Your Movie</string>
-    <string name="movie_description">Movie description</string>
+    <string name="movie_rating">Movie Rating</string>
     <string name="movie_title">Movie title</string>
-    <string name="button">Button</string>
+    <string name="save_favorites">Save to favorites</string>
     <string name="movie_poster1">movie poster</string>
     <string name="actors">Actors:</string>
-    <string name="movie_description1">Movie Description</string>
+    <string name="movie_description1">Movie Rating</string>
     <string name="director">Director:</string>
     <string name="movie_title1">Movie Title</string>
     <string name="year">Year:</string>
     <string name="saved_movies">Saved Movies</string>
     <string name="movie_title2">Movie Title</string>
     <string name="thumbnail">Thumbnail</string>
+    <string name="go_to_favorites_movies">go to favorites movies</string>
 </resources>
