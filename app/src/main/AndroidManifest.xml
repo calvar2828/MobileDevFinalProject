@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <!-- permission to make the http requests to the api-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -24,7 +25,9 @@
             </intent-filter>
         </activity>
 
+        <!--screen for movie details-->
         <activity android:name=".network.movie_Details" />
+        <!--screen for favorite movies-->
         <activity android:name=".network.favorites_movies"/>
     </application>
 

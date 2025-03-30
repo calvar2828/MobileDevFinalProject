@@ -15,6 +15,7 @@ import com.example.finalproject1.models.Movie;
 
 public class movie_Details extends AppCompatActivity {
 
+    //UI elements
     private TextView txtTitle,txtRating,txtPlot,txtDirector,txtActors,txtYear;
     private ImageView imgPoster;
 
@@ -23,6 +24,7 @@ public class movie_Details extends AppCompatActivity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_movie_details);
 
+        // to connect the XML elements to java
         txtTitle =findViewById(R.id.txt_movieTitle1);
         imgPoster=findViewById(R.id.img_moviePoster1);
         txtPlot=findViewById(R.id.txt_movieDescription1);
@@ -30,8 +32,10 @@ public class movie_Details extends AppCompatActivity {
         txtActors=findViewById(R.id.txt_movieActors);
         txtYear=findViewById(R.id.txt_movieYear);
 
-
+        //get the movie passed from mainactivity
         Movie movie = (Movie) getIntent().getSerializableExtra("movie_data");
+
+        //if the movie is valid show the data with this
         if(movie!=null){
             txtTitle.setText(movie.getTitle());
             txtPlot.setText(movie.getPlot());
@@ -40,13 +44,14 @@ public class movie_Details extends AppCompatActivity {
             txtYear.setText("Year: " + movie.getYear());
 
 
-
+            //Glide to load the image
             Glide.with(this)
                     .load(movie.getPoster())
                     .into(imgPoster);
         }
 
     }
+    //with this function the user can go to the main screen
 
     public void accessMain(View view){
         Intent intent =new Intent(this, MainActivity.class);

@@ -2,7 +2,11 @@ package com.example.finalproject1.models;
 
 import java.io.Serializable;
 
+
+//serializable is used to pack an object in a format that android will use it to send the info between pages
 public class Movie implements Serializable {
+
+    //this names have to match with the OMDb API response(case sensitive)
     private String Title;
     private String Year;
     private String Director;

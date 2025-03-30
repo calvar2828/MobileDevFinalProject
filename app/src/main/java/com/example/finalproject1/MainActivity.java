@@ -26,9 +26,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    //this will store the current movie... with this i can pass it to another activity
     private Movie currentMovie;
+
+    //UI elements
     private TextView txtTitle, txtYear, txtDirector, txtActors, txtRating, txtPlot;
     private ImageView imgPoster;
+
+    //random words to use it to fetch movies randomly
     private final String[] randomWords = {"love", "war", "future", "dark", "happy", "space", "ghost", "magic"};
 
     @Override
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_original);
 
-        // Vincular los elementos de la UI
+        // link elements
         imgPoster = findViewById(R.id.img_moviePoster);
         txtTitle = findViewById(R.id.txt_movieTitle);
         txtRating= findViewById(R.id.txt_movieRating);
@@ -46,23 +52,27 @@ public class MainActivity extends AppCompatActivity {
         txtRating = findViewById(R.id.txt_rating);*/
         //txtPlot = findViewById(R.id.txt_movieDesciption);
 
-        // Obtener una película aleatoria
+        // load the random movie
         fetchRandomMovie();
 
 
     }
+    //Fetch the next movie with the button next
     public void nextButton(View view){
+
         fetchRandomMovie();
     }
+
     private void fetchRandomMovie() {
         String randomQuery = randomWords[new Random().nextInt(randomWords.length)];
 
+        //setup for retrofit and the api call
         MovieApiService apiService = RetrofitClient.getClient().create(MovieApiService.class);
-        Call<Movie> call = apiService.getMovie(randomQuery, "7ce58d1c");  // 👈 Pasa la API Key aquí
-
+        Call<Movie> call = apiService.getMovie(randomQuery, "7ce58d1c");  // key api
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
+                //if the response is successful and not empty just upadte the UI
                 if (response.isSuccessful() && response.body() != null) {
                     Movie movie = response.body();
                     updateUI(movie);
@@ -79,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //takes the fetched movie to shows the data on the screen
     private void updateUI(Movie movie) {
         currentMovie = movie;
         txtTitle.setText(movie.getTitle());
@@ -89,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
         txtRating.setText("IMDb Rating: " + (movie.getImdbRating() != null ? movie.getImdbRating() : "N/A"));
         txtPlot.setText(movie.getPlot());*/
 
-        // Cargar imagen con Glide
+        // glide is uses to upload an image
         Glide.with(this)
                 .load(movie.getPoster())
                 .into(imgPoster);
     }
 
 
-
+    //goes to movies details and send the current movie
     public void accessMoviesDetails(View view){
         if(currentMovie!=null){
             Intent intent = new Intent(this, movie_Details.class);
@@ -106,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //goes to favorites screen
     public void accessFavoritesMovies(View view){
         Intent intent = new Intent(this, favorites_movies.class);
         startActivity(intent);

@@ -14,13 +14,16 @@ public class favorites_movies extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_favorites);
+        setContentView(R.layout.activity_favorites);//to load the layout
     }
 
+    //with this function sends the user back to the main screen
     public void accessMain (View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    //opens the movie details screen
     public void accessMoviesDetails(View view){
         Intent intent = new Intent(this, movie_Details.class);
         startActivity(intent);
