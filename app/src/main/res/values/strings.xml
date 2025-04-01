@@ -17,4 +17,5 @@
     <string name="movie_title2">Movie Title</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="go_to_favorites_movies">go to favorites movies</string>
+    <string name="btn_favorites_movies_menu">Favorite Movies</string>
 </resources>

@@ -1,9 +1,15 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
     <style name="Base.Theme.FinalProject1" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.FinalProject1" parent="Base.Theme.FinalProject1" />
+    <style name="Theme.FinalProject1" parent="Base.Theme.FinalProject1">
+        <item name="navigationViewStyle">@style/Widget.MyNavigationView</item>
+    </style>
+
+    <style name="Widget.MyNavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:background">@color/background_dark</item>
+        <item name="itemIconTint">@color/text_primary</item>
+        <item name="itemTextColor">@color/text_primary</item>
+    </style>
 </resources>

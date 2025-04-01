@@ -1,6 +1,7 @@
 package com.example.finalproject1;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.finalproject1.models.Movie;
@@ -18,6 +21,7 @@ import com.example.finalproject1.network.MovieApiService;
 import com.example.finalproject1.network.RetrofitClient;
 import com.example.finalproject1.network.favorites_movies;
 import com.example.finalproject1.network.movie_Details;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Random;
 
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     //UI elements
     private TextView txtTitle, txtYear, txtDirector, txtActors, txtRating, txtPlot;
     private ImageView imgPoster;
+
+    private DrawerLayout drawerLayout;
 
     //random words to use it to fetch movies randomly
     private final String[] randomWords = {"love", "war", "future", "dark", "happy", "space", "ghost", "magic"};
@@ -51,6 +57,30 @@ public class MainActivity extends AppCompatActivity {
         txtActors = findViewById(R.id.txt_actors);
         txtRating = findViewById(R.id.txt_rating);*/
         //txtPlot = findViewById(R.id.txt_movieDesciption);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView btnMenu = findViewById(R.id.btn_menu);
+
+        btnMenu.setOnClickListener(v->{
+            if(drawerLayout!=null){
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        NavigationView navigationView= findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemId=item.getItemId();
+
+            if(itemId == R.id.nav_favorites){
+                Intent intent = new Intent(this, favorites_movies.class);
+                startActivity(intent);
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            return false;
+        });
+
 
         // load the random movie
         fetchRandomMovie();
