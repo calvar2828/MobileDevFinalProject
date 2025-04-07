@@ -1,39 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_favorites"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="4dp">
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:background="@color/background_dark"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".FavoritesActivity">
 
-        <ImageView
-            android:id="@+id/img_thumbnail"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:background="@color/background_dark"
-            android:contentDescription="@string/thumbnail"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+        <ImageButton
+            android:id="@+id/btn_menu_favorites"
+            android:layout_width="43dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:contentDescription="Open Menu"
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
         <TextView
-            android:id="@+id/txt_movieTitleFavorite"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingStart="12dp"
-            android:text="@string/movie_title2"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
+            android:text="@string/saved_movies"
+            android:textSize="26sp"
             android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
+            android:textColor="@color/text_primary"
+            android:paddingBottom="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/img_recyclerViewMovie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/activity_favorite_movie"/>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/Widget.MyNavigationView"
+        app:menu="@menu/nav_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

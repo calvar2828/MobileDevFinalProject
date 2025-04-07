@@ -8,51 +8,61 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject1.MainActivity;
 import com.example.finalproject1.R;
+import com.example.finalproject1.adapter.FavoriteMoviesAdapter;
+import com.example.finalproject1.models.Movie;
+import com.example.finalproject1.utils.FavoritesManager;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class favorites_movies extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    private RecyclerView recyclerView;
+    private FavoriteMoviesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_favorites);//to load the layout
+        setContentView(R.layout.activity_favorite_movie); // actual layout con RecyclerView
 
         drawerLayout = findViewById(R.id.drawer_layout_favorites);
         ImageView btnMenu = findViewById(R.id.btn_menu_favorites);
+        recyclerView = findViewById(R.id.img_recyclerViewMovie);
 
-        btnMenu.setOnClickListener(v->{
-            if(drawerLayout!=null){
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        List<Movie> favoriteMovies = FavoritesManager.getFavorites(this);
+        adapter = new FavoriteMoviesAdapter(favoriteMovies,this);
+        recyclerView.setAdapter(adapter);
+
+        btnMenu.setOnClickListener(v -> {
+            if(drawerLayout != null){
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
-        NavigationView navigationView= findViewById(R.id.navigation_view_favorites);
+        NavigationView navigationView = findViewById(R.id.navigation_view_favorites);
         navigationView.setNavigationItemSelectedListener(item -> {
-            int itemId=item.getItemId();
+            int itemId = item.getItemId();
 
             if(itemId == R.id.nav_favoritesMovies){
-                Intent intent = new Intent(this, favorites_movies.class);
-                startActivity(intent);
-
+                startActivity(new Intent(this, favorites_movies.class));
                 drawerLayout.closeDrawers();
                 return true;
             }
-            if(itemId ==R.id.nav_about){
-                Intent intent= new Intent(this, About.class);
-                startActivity(intent);
-
+            if(itemId == R.id.nav_about){
+                startActivity(new Intent(this, About.class));
                 drawerLayout.closeDrawers();
                 return true;
             }
             if(itemId == R.id.nav_Main){
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-
+                startActivity(new Intent(this, MainActivity.class));
                 drawerLayout.closeDrawers();
                 return true;
             }
@@ -60,16 +70,11 @@ public class favorites_movies extends AppCompatActivity {
         });
     }
 
-    //with this function sends the user back to the main screen
-    public void accessMain (View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void accessMain(View view){
+        startActivity(new Intent(this, MainActivity.class));
     }
 
-    //opens the movie details screen
     public void accessMoviesDetails(View view){
-        Intent intent = new Intent(this, movie_Details.class);
-        startActivity(intent);
-
+        startActivity(new Intent(this, movie_Details.class));
     }
 }

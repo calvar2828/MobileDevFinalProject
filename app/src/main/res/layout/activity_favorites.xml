@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:padding="20dp"
         tools:context=".FavoritesActivity">
+
         <ImageButton
             android:id="@+id/btn_menu_favorites"
             android:layout_width="43dp"
@@ -39,6 +40,7 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/activity_favorite_movie"/>
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view_favorites"
         android:layout_width="wrap_content"
