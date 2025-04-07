@@ -29,6 +29,8 @@
         <activity android:name=".network.movie_Details" />
         <!--screen for favorite movies-->
         <activity android:name=".network.favorites_movies"/>
+        <!--screen for about-->
+        <activity android:name=".network.About" />
     </application>
 
 </manifest>

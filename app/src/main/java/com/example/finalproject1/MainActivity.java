@@ -1,22 +1,19 @@
 package com.example.finalproject1;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.finalproject1.models.Movie;
+import com.example.finalproject1.network.About;
 import com.example.finalproject1.network.MovieApiService;
 import com.example.finalproject1.network.RetrofitClient;
 import com.example.finalproject1.network.favorites_movies;
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         txtRating = findViewById(R.id.txt_rating);*/
         //txtPlot = findViewById(R.id.txt_movieDesciption);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout_main);
         ImageView btnMenu = findViewById(R.id.btn_menu);
 
         btnMenu.setOnClickListener(v->{
@@ -71,8 +68,22 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId=item.getItemId();
 
-            if(itemId == R.id.nav_favorites){
+            if(itemId == R.id.nav_favoritesMovies){
                 Intent intent = new Intent(this, favorites_movies.class);
+                startActivity(intent);
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            if(itemId ==R.id.nav_about){
+                Intent intent= new Intent(this, About.class);
+                startActivity(intent);
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            if(itemId == R.id.nav_Main){
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
 
                 drawerLayout.closeDrawers();
@@ -113,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-                Log.e("API_ERROR", "Error al obtener datos: " + t.getMessage());
+                Log.e("API_ERROR", "Error getting the data: " + t.getMessage());
                 txtTitle.setText("No movie found");
             }
         });

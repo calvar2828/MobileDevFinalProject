@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_about"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_menu_about"
+                android:layout_width="43dp"
+                android:layout_height="48dp"
+                android:background="@null"
+                android:contentDescription="Open Menu"
+                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+            <TextView
+                android:id="@+id/txt_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/about_us"
+                android:textColor="@color/text_primary"
+                android:textSize="60sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_bowvalley"
+            android:layout_width="match_parent"
+            android:layout_height="285dp"
+            android:contentDescription="@string/bow_valley_college_emblem"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/txt_members"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/members"
+            android:textColor="@color/text_primary"
+            android:textSize="48sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/carlos_alvarez"
+            android:textColor="@color/text_secondary"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view_about"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/Widget.MyNavigationView"
+        app:menu="@menu/nav_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

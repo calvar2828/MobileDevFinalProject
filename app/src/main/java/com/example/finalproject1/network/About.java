@@ -13,17 +13,16 @@ import com.example.finalproject1.MainActivity;
 import com.example.finalproject1.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class favorites_movies extends AppCompatActivity {
+public class About extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_favorites);//to load the layout
-
-        drawerLayout = findViewById(R.id.drawer_layout_favorites);
-        ImageView btnMenu = findViewById(R.id.btn_menu_favorites);
+        setContentView(R.layout.about);//to load the layout
+        drawerLayout = findViewById(R.id.drawer_layout_about);
+        ImageView btnMenu = findViewById(R.id.btn_menu_about);
 
         btnMenu.setOnClickListener(v->{
             if(drawerLayout!=null){
@@ -31,7 +30,7 @@ public class favorites_movies extends AppCompatActivity {
             }
         });
 
-        NavigationView navigationView= findViewById(R.id.navigation_view_favorites);
+        NavigationView navigationView= findViewById(R.id.navigation_view_about);
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId=item.getItemId();
 
@@ -60,16 +59,5 @@ public class favorites_movies extends AppCompatActivity {
         });
     }
 
-    //with this function sends the user back to the main screen
-    public void accessMain (View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 
-    //opens the movie details screen
-    public void accessMoviesDetails(View view){
-        Intent intent = new Intent(this, movie_Details.class);
-        startActivity(intent);
-
-    }
 }

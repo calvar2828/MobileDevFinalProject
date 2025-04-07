@@ -18,4 +18,10 @@
     <string name="thumbnail">Thumbnail</string>
     <string name="go_to_favorites_movies">go to favorites movies</string>
     <string name="btn_favorites_movies_menu">Favorite Movies</string>
+    <string name="about">About</string>
+    <string name="main_menu">Main menu</string>
+    <string name="about_us"><u>About us</u></string>
+    <string name="bow_valley_college_emblem">Bow valley college emblem\n</string>
+    <string name="members">Members\n</string>
+    <string name="carlos_alvarez">Carlos Alvarez \nRuss Stodley\n</string>
 </resources>
