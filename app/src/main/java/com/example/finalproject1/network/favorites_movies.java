@@ -29,7 +29,7 @@ public class favorites_movies extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_favorite_movie); // actual layout con RecyclerView
+        setContentView(R.layout.activity_favorites); // actual layout con RecyclerView
 
         drawerLayout = findViewById(R.id.drawer_layout_favorites);
         ImageView btnMenu = findViewById(R.id.btn_menu_favorites);

@@ -38,7 +38,7 @@
             android:id="@+id/img_recyclerViewMovie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/activity_favorite_movie"/>
+            tools:listitem="@layout/favorite_movie_item"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
