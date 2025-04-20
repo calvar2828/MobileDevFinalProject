@@ -1,6 +1,9 @@
 package com.example.finalproject1.adapter;
 
+import static com.example.finalproject1.utils.FavoritesManager.removeFromFavorites;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.finalproject1.R;
 import com.example.finalproject1.models.Movie;
+import com.example.finalproject1.network.movie_Details;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -49,9 +53,15 @@ public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAd
                 .into(holder.imgPoster);
 
         holder.btnRemove.setOnClickListener(v -> {
-            removeMovieFromFavorites(movie);
+            removeFromFavorites(context,movie);
             movieList.remove(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());
+        });
+
+        holder.imgPoster.setOnClickListener(v->{
+            Intent intentFavorites =new Intent(context, movie_Details.class);
+            intentFavorites.putExtra("movie",movie);
+            context.startActivity(intentFavorites);
         });
     }
 
@@ -60,37 +70,7 @@ public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAd
         return movieList.size();
     }
 
-    private void removeMovieFromFavorites(Movie movie) {
-        try {
-            FileInputStream fis = context.openFileInput("favorites.json");
-            byte[] data = new byte[fis.available()];
-            fis.read(data);
-            fis.close();
 
-            String json = new String(data, "UTF-8");
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<Movie>>() {}.getType();
-            List<Movie> favorites = gson.fromJson(json, listType);
-
-            for (int i = 0; i < favorites.size(); i++) {
-                if (favorites.get(i).getTitle().equalsIgnoreCase(movie.getTitle())) {
-                    favorites.remove(i);
-                    break;
-                }
-            }
-
-            String updatedJson = gson.toJson(favorites);
-            FileOutputStream fos = context.openFileOutput("favorites.json", Context.MODE_PRIVATE);
-            fos.write(updatedJson.getBytes());
-            fos.close();
-
-            Toast.makeText(context, "Movie removed", Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(context, "Error removing movie", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle, txtYear;

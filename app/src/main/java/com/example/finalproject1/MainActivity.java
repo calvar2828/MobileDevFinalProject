@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -39,11 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
     //random words to use it to fetch movies randomly
     private final String[] randomWords = {"love", "war", "future", "dark", "happy", "space", "ghost", "magic"};
+    private String getRandomLetterQuery() {
+        char letter = (char) ('a' + new Random().nextInt(26));
+        return String.valueOf(letter);
+    }
+    private static boolean showToast = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_original);
+
+        if(!showToast){
+            Toast.makeText(this, "Click on the poster for details", Toast.LENGTH_SHORT).show();
+            showToast = true;
+        }
 
         // link elements
         imgPoster = findViewById(R.id.img_moviePoster);
@@ -91,22 +102,40 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-
-
         // load the random movie
         fetchRandomMovie();
-
-
     }
+
     //Fetch the next movie with the button next
     public void nextButton(View view){
-
         fetchRandomMovie();
     }
-
     private void fetchRandomMovie() {
-        String randomQuery = randomWords[new Random().nextInt(randomWords.length)];
+        String randomQuery = getRandomLetterQuery(); // ahora usamos una letra aleatoria
 
+        MovieApiService apiService = RetrofitClient.getClient().create(MovieApiService.class);
+        Call<Movie> call = apiService.getMovie(randomQuery, "7ce58d1c"); // tu API key
+        call.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getTitle() != null) {
+                    Movie movie = response.body();
+                    updateUI(movie);
+                } else {
+                    txtTitle.setText("No movie found. Try again!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+                Log.e("API_ERROR", "Error getting the data: " + t.getMessage());
+                txtTitle.setText("Error loading movie");
+            }
+        });
+    }
+
+    /*private void fetchRandomMovie() {
+        String randomQuery = randomWords[new Random().nextInt(randomWords.length)];
         //setup for retrofit and the api call
         MovieApiService apiService = RetrofitClient.getClient().create(MovieApiService.class);
         Call<Movie> call = apiService.getMovie(randomQuery, "7ce58d1c");  // key api
@@ -121,14 +150,13 @@ public class MainActivity extends AppCompatActivity {
                     txtTitle.setText("No movie found");
                 }
             }
-
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
                 Log.e("API_ERROR", "Error getting the data: " + t.getMessage());
                 txtTitle.setText("No movie found");
             }
         });
-    }
+    }*/
 
     //takes the fetched movie to shows the data on the screen
     private void updateUI(Movie movie) {
@@ -155,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("movie_data",currentMovie);
             startActivity(intent);
         }
-
     }
 
     //goes to favorites screen

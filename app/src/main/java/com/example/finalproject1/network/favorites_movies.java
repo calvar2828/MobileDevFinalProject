@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -25,11 +26,14 @@ public class favorites_movies extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private RecyclerView recyclerView;
     private FavoriteMoviesAdapter adapter;
+    private Movie movie;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_favorites); // actual layout con RecyclerView
+
+
 
         drawerLayout = findViewById(R.id.drawer_layout_favorites);
         ImageView btnMenu = findViewById(R.id.btn_menu_favorites);
@@ -68,7 +72,12 @@ public class favorites_movies extends AppCompatActivity {
             }
             return false;
         });
+
+
+
     }
+
+
 
     public void accessMain(View view){
         startActivity(new Intent(this, MainActivity.class));

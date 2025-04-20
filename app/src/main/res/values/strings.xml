@@ -23,5 +23,6 @@
     <string name="about_us"><u>About us</u></string>
     <string name="bow_valley_college_emblem">Bow valley college emblem\n</string>
     <string name="members">Members\n</string>
-    <string name="carlos_alvarez">Carlos Alvarez \nRuss Stodley\n</string>
+    <string name="carlos_alvarez">Carlos Alvarez \nRuss Stodley\n Aaron Amoso</string>
+    <string name="open_menu">Open Menu</string>
 </resources>

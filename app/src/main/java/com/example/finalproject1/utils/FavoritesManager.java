@@ -49,4 +49,14 @@ public class FavoritesManager {
             e.printStackTrace();
         }
     }
+    public static void removeFromFavorites(Context context, Movie movie) {
+        List<Movie> favorites = getFavorites(context);
+        for (int i = 0; i < favorites.size(); i++) {
+            if (favorites.get(i).getTitle().equalsIgnoreCase(movie.getTitle())) {
+                favorites.remove(i);
+                break;
+            }
+        }
+        saveFavoritesToFile(context, favorites);
+    }
 }

@@ -8,12 +8,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.finalproject1.MainActivity;
 import com.example.finalproject1.R;
 import com.example.finalproject1.models.Movie;
 import com.example.finalproject1.utils.FavoritesManager;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,6 +30,7 @@ public class movie_Details extends AppCompatActivity {
     private TextView txtTitle, txtRating, txtPlot, txtDirector, txtActors, txtYear;
     private ImageView imgPoster;
     private Movie movie;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -40,6 +44,44 @@ public class movie_Details extends AppCompatActivity {
         txtActors = findViewById(R.id.txt_movieActors);
         txtYear = findViewById(R.id.txt_movieYear);
 
+        drawerLayout = findViewById(R.id.drawer_layout_movie_details);
+        ImageView btnMenu = findViewById(R.id.btn_menu_movie_details);
+
+        btnMenu.setOnClickListener(v->{
+            if(drawerLayout!=null ){
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        NavigationView navigationView = findViewById(R.id.navigation_view_movie_details);
+        navigationView.setNavigationItemSelectedListener(item->{
+            int itemId=item.getItemId();
+
+            if(itemId == R.id.nav_favoritesMovies){
+                Intent intent = new Intent(this, favorites_movies.class);
+                startActivity(intent);
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            if(itemId==R.id.nav_about){
+                Intent intent =new Intent(this, About.class);
+                startActivity(intent);
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            if(itemId==R.id.nav_Main){
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            return false;
+        });
+
+        //Display the details of a movie in the main
         movie = (Movie) getIntent().getSerializableExtra("movie_data");
 
         if (movie != null) {
@@ -53,7 +95,25 @@ public class movie_Details extends AppCompatActivity {
                     .load(movie.getPoster())
                     .into(imgPoster);
         }
+
+        //to display the details when click on a movie in the favorite list
+        Intent intentFavorites = getIntent();
+        if (intentFavorites != null && intentFavorites.hasExtra("movie")) {
+            movie = (Movie) intentFavorites.getSerializableExtra("movie");
+
+            txtTitle.setText(movie.getTitle());
+            txtPlot.setText(movie.getPlot());
+            txtDirector.setText("Director: " + movie.getDirector());
+            txtActors.setText("Actors: " + movie.getActors());
+            txtYear.setText("Year: " + movie.getYear());
+
+            Glide.with(this)
+                    .load(movie.getPoster())
+                    .into(imgPoster);
+        }
     }
+
+
 
     public void accessMain(View view) {
         startActivity(new Intent(this, MainActivity.class));

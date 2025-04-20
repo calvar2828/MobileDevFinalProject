@@ -17,6 +17,7 @@
             android:id="@+id/img_card_poster"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:onClick="accessMoviesDetails"
             android:scaleType="centerCrop" />
 
         <LinearLayout
