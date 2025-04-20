@@ -33,17 +33,12 @@ public class favorites_movies extends AppCompatActivity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_favorites); // actual layout con RecyclerView
 
-
-
+        //initialize drawer layout and navigation view
         drawerLayout = findViewById(R.id.drawer_layout_favorites);
         ImageView btnMenu = findViewById(R.id.btn_menu_favorites);
-        recyclerView = findViewById(R.id.img_recyclerViewMovie);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Movie> favoriteMovies = FavoritesManager.getFavorites(this);
-        adapter = new FavoriteMoviesAdapter(favoriteMovies,this);
-        recyclerView.setAdapter(adapter);
+
 
         btnMenu.setOnClickListener(v -> {
             if(drawerLayout != null){
@@ -51,6 +46,8 @@ public class favorites_movies extends AppCompatActivity {
             }
         });
 
+
+        //navigation options
         NavigationView navigationView = findViewById(R.id.navigation_view_favorites);
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -72,11 +69,19 @@ public class favorites_movies extends AppCompatActivity {
             }
             return false;
         });
+        //to show the list of favorite movies
+        recyclerView = findViewById(R.id.img_recyclerViewMovie);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //Get the list of favorite movies from the FavoritesManager
+        List<Movie> favoriteMovies = FavoritesManager.getFavorites(this);
+
+        //set the adapter to display the favorite movies in the recyclerview
+        adapter = new FavoriteMoviesAdapter(favoriteMovies,this);
+        recyclerView.setAdapter(adapter);
 
 
     }
-
 
 
     public void accessMain(View view){

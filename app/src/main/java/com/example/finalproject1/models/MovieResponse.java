@@ -1,9 +1,23 @@
 package com.example.finalproject1.models;
 
-public class MovieResponse {
-    private Movie movie;
+import java.io.Serializable;
+import java.util.List;
 
-    public Movie getMovie() {
-        return movie;
+public class MovieResponse implements Serializable {
+
+    private List<Movie> Search;
+    private String totalResults;
+    private String Response;
+
+    public List<Movie> getSearch() {
+        return Search;
+    }
+
+    public String getTotalResults() {
+        return totalResults;
+    }
+
+    public String getResponse() {
+        return Response;
     }
 }

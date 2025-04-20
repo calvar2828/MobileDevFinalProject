@@ -18,19 +18,17 @@ import com.bumptech.glide.Glide;
 import com.example.finalproject1.R;
 import com.example.finalproject1.models.Movie;
 import com.example.finalproject1.network.movie_Details;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.lang.reflect.Type;
 import java.util.List;
 
+
+// This adapter class connects the list of favorite movies to the RecyclerView
 public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAdapter.MovieViewHolder> {
 
-    private List<Movie> movieList;
-    private Context context;
+    private List<Movie> movieList;//list of favorite movies
+    private Context context;//context for ui operations
 
+    //constructor for the adapter
     public FavoriteMoviesAdapter(List<Movie> movies, Context context) {
         this.movieList = movies;
         this.context = context;
@@ -43,21 +41,25 @@ public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAd
         return new MovieViewHolder(view);
     }
 
+
+    // This method binds movie data to the views
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         holder.txtTitle.setText(movie.getTitle());
         holder.txtYear.setText("Year: " + movie.getYear());
+        // Load movie poster image using Glide
         Glide.with(holder.itemView.getContext())
                 .load(movie.getPoster())
                 .into(holder.imgPoster);
 
+        //on clicking the remove button remove the movie from favorites
         holder.btnRemove.setOnClickListener(v -> {
             removeFromFavorites(context,movie);
             movieList.remove(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());
         });
-
+        // on clicking the item go to movie details screen
         holder.imgPoster.setOnClickListener(v->{
             Intent intentFavorites =new Intent(context, movie_Details.class);
             intentFavorites.putExtra("movie",movie);
@@ -65,13 +67,14 @@ public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAd
         });
     }
 
+    // Return the size of the movie list
     @Override
     public int getItemCount() {
         return movieList.size();
     }
 
 
-
+    //viewHolder class holds references to the UI elements for each item
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle, txtYear;
         ImageView imgPoster;
